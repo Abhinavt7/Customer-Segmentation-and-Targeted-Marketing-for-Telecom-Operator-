@@ -4,14 +4,14 @@ This project implements a comprehensive, end-to-end machine learning pipeline fo
 
 ---
 
-## 🚀 Project Overview
+## Project Overview
 
 - **Objective:** Segment telecom customers into distinct groups based on behavioral, demographic, and usage patterns to enable targeted marketing and strategic decision-making.
 - **Tech Stack:** Python, pandas, scikit-learn, matplotlib, seaborn, Jupyter
 
 ---
 
-## 📊 Key Features
+## Key Features
 
 - Advanced data cleaning (missing values, deduplication, outlier removal)
 - Feature engineering and encoding of categorical/numeric variables
@@ -23,7 +23,7 @@ This project implements a comprehensive, end-to-end machine learning pipeline fo
 
 ---
 
-## 📈 Results & Insights
+## Results & Insights
 
 - Identified five actionable customer segments via K-Means (using both Silhouette Score & Elbow Method).
 - Built detailed cluster profiles with descriptive statistics and visualizations.
@@ -32,7 +32,7 @@ This project implements a comprehensive, end-to-end machine learning pipeline fo
 
 ---
 
-## 🤖 Technical Stack
+## Technical Stack
 
 - **Languages:** Python (3.7+)
 - **Main Libraries:** pandas, numpy, scikit-learn, matplotlib, seaborn, Jupyter
