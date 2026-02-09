@@ -147,4 +147,11 @@ elif page == 'Cluster Information':
                 ' - Premium data users—engaged, high‑spending customers who are valuable for upselling.\n'
                 )
     with right:
-        st.image(os.path.join(os.getcwd(),"visualizations","cluster_radar.png"),caption="Customer Behavior Clusters ",width=630)#,height=400)
+        from pathlib import Path
+
+        img_path = Path(__file__).resolve().parent.parent / "visualizations" / "cluster_radar.png"
+        if img_path.exists():
+            st.image(str(img_path), caption="Customer Behavior Clusters ", width=630)
+        else:
+            st.info("Visualization not available: cluster_radar.png not found on the server.")
+            st.write("Expected image path:", str(img_path))
