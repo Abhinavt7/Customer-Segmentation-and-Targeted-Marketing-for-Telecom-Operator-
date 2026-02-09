@@ -3,21 +3,42 @@ import sys
 import pandas as pd
 import joblib
 import streamlit as st
+from pathlib import Path
 
 st.set_page_config(layout="wide")
 
-ROOT = os.path.dirname(os.path.dirname(__file__))
-if ROOT not in sys.path:
-    sys.path.append(ROOT)
+# Get the root directory more reliably
+CURRENT_DIR = Path(__file__).resolve().parent
+ROOT = CURRENT_DIR.parent
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
 
 from src.preprocessing import encode_categorical
 
 @st.cache_resource
 def load_models():
-    model_path = os.path.join(ROOT, 'models', 'kmeans_model.pkl')
-    scaler_path = os.path.join(ROOT, 'models', 'scaler.pkl')
-    kmeans = joblib.load(model_path)
-    scaler = joblib.load(scaler_path)
+    model_path = ROOT / 'models' / 'kmeans_model.pkl'
+    scaler_path = ROOT / 'models' / 'scaler.pkl'
+    
+    # Check if files exist, if not try alternative paths
+    if not model_path.exists():
+        # Try relative to current directory
+        alt_model_path = CURRENT_DIR / 'models' / 'kmeans_model.pkl'
+        if alt_model_path.exists():
+            model_path = alt_model_path
+        else:
+            raise FileNotFoundError(f"Model file not found at {model_path} or {alt_model_path}")
+    
+    if not scaler_path.exists():
+        # Try relative to current directory
+        alt_scaler_path = CURRENT_DIR / 'models' / 'scaler.pkl'
+        if alt_scaler_path.exists():
+            scaler_path = alt_scaler_path
+        else:
+            raise FileNotFoundError(f"Scaler file not found at {scaler_path} or {alt_scaler_path}")
+    
+    kmeans = joblib.load(str(model_path))
+    scaler = joblib.load(str(scaler_path))
     return kmeans, scaler
 
 kmeans_model, scaler = load_models()
