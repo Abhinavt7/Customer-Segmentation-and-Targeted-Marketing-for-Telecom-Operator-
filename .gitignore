@@ -66,5 +66,9 @@ ENV/
 *.h5
 *.model
 
+# Exception: Allow model files in the models directory
+!models/
+!models/**/*.pkl
+
 # Logs
 *.log
